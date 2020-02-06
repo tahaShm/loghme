@@ -112,7 +112,7 @@ public class App
     }
 
     public static void getCart() throws JsonParseException, JsonMappingException, IOException{
-
+        customer.printFoodCart();
     }
 
     public static void finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
