@@ -1,5 +1,13 @@
 package ie;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Food {
     private String name;
     private String description;
@@ -36,5 +44,11 @@ public class Food {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void printInfo() throws JsonParseException, JsonMappingException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(this);
+        System.out.println(json);
     }
 }

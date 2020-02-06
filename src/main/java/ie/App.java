@@ -15,41 +15,81 @@ public class App
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
     private static Customer customer;
 
+    public static int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
+        int index = -1;
+        ObjectMapper nameMapper = new ObjectMapper();
+        Names newName = nameMapper.readValue(jsonData, Names.class);
+        String restaurantName = "";
+        if (nameOrRestaurantName == 1)
+            restaurantName = newName.getRestaurantName();
+        else
+            restaurantName = newName.getName();
+        for (int i = 0; i < restaurants.size(); i++) {
+            if (restaurantName.equals(restaurants.get(i).getName())) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
     public static void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
+        //What should we do if restaurant name is repetitive?
         ObjectMapper mapper = new ObjectMapper();
         Restaurant newRestaurant = mapper.readValue(jsonData, Restaurant.class);
         restaurants.add(newRestaurant);
     }
 
-    public static void addFood(String jsonData) {
+    public static void addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        Food newFood = mapper.readValue(jsonData, Food.class);
+        int index = getIndexOfRestaurant(jsonData, 1);
+        if (index >= 0)
+            restaurants.get(index).addFood(newFood);
+        else
+            System.out.println("Invalid restaurant name!");
+    }
+
+    public static void getRestaurants() throws JsonParseException, JsonMappingException, IOException{
+        for (int i = 0; i < restaurants.size(); i++) {
+            System.out.println(restaurants.get(i).getName());
+        }
+    }
+
+    public static void getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+        int index = getIndexOfRestaurant(jsonData, 0);
+        if (index >= 0)
+            restaurants.get(index).printJsonInfo();
+        else
+            System.out.println("Invalid restaurant name!");
+    }
+
+    public static void getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+        int index = getIndexOfRestaurant(jsonData, 1);
+
+        ObjectMapper nameMapper = new ObjectMapper();
+        Names newName = nameMapper.readValue(jsonData, Names.class);
+        String foodName = newName.getFoodName();
+
+        if (index >= 0)
+            restaurants.get(index).printJsonFoodInfo(foodName);
+        else
+            System.out.println("Invalid restaurant name!");
+    }
+
+    public static void addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+        
+    }
+
+    public static void getCart() throws JsonParseException, JsonMappingException, IOException{
 
     }
 
-    public static void getRestaurants() throws JsonParseException, JsonMappingException, IOException {
-        System.out.println(restaurants.size());
-    }
-
-    public static void getRestaurant(String jsonData) {
+    public static void finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
 
     }
 
-    public static void getFoods(String jsonData) {
-
-    }
-
-    public static void addToCart(String jsonData) {
-
-    }
-
-    public static void getCart() {
-
-    }
-
-    public static void finalizeOrder() {
-
-    }
-
-    public static void getRecommendedRestaurants() {
+    public static void getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
 
     }
 
@@ -68,8 +108,8 @@ public class App
             case "getRestaurant":
                 getRestaurant(jsonData);
                 break;
-            case "getFoods":
-                getFoods(jsonData);
+            case "getFood":
+                getFood(jsonData);
                 break;
             case "addToCart":
                 addToCart(jsonData);
