@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class App
 {
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
-    private static Customer customer;
+    private static Customer customer = new Customer();
 
     public static int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
         int index = -1;
@@ -78,7 +78,37 @@ public class App
     }
 
     public static void addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
-        
+        boolean allowToAdd = false;
+        ObjectMapper nameMapper = new ObjectMapper();
+        Names newName = nameMapper.readValue(jsonData, Names.class);
+        String restaurantName = newName.getRestaurantName();
+
+        if (customer.isRestaurantSet() == false)
+            allowToAdd = true;
+        else {
+            String currentRestaurantName = customer.getRestaurantName();
+            if (currentRestaurantName.equals(restaurantName))
+                allowToAdd = true;
+        }
+
+        if (allowToAdd) {
+            int index = getIndexOfRestaurant(jsonData, 1);
+
+            String foodName = newName.getFoodName();
+
+            if (index >= 0){
+                if (restaurants.get(index).isFoodValid(foodName)){
+                    customer.addFoodToCart(foodName, restaurantName);
+                }
+                else
+                    System.out.println("Invalid food name!");
+            }
+            else
+                System.out.println("Invalid restaurant name!");
+        }
+        else {
+            System.out.println("Your cart is from another restaurant!");
+        }
     }
 
     public static void getCart() throws JsonParseException, JsonMappingException, IOException{

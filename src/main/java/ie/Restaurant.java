@@ -68,4 +68,18 @@ public class Restaurant {
         else
             System.out.println("Invalid food name!");
     }
+
+    public boolean isFoodValid(String foodName) {
+        int index = -1;
+        boolean isValid = false;
+        for (int i = 0; i < menu.size(); i++) {
+            if (foodName.equals(menu.get(i).getName())) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0)
+            isValid = true;
+        return isValid;
+    }
 }
