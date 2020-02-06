@@ -1,3 +1,5 @@
+package ie;
+
 public class Customer {
     private boolean restaurantIsSet;
     private String RestaurantName;

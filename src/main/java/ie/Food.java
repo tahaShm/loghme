@@ -1,3 +1,5 @@
+package ie;
+
 public class Food {
     private String name;
     private String description;
