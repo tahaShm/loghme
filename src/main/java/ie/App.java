@@ -2,18 +2,59 @@ package ie;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App
 {
-    private Restaurant[] restaurants;
-    private Customer customer;
+    private static ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private static Customer customer;
 
-    public static void handleAction(String action, String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public static void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Restaurant newRestaurant = mapper.readValue(jsonData, Restaurant.class);
+        restaurants.add(newRestaurant);
+    }
+
+    public static void addFood(String jsonData) {
+
+    }
+
+    public static void getRestaurants() throws JsonParseException, JsonMappingException, IOException {
+        System.out.println(restaurants.size());
+    }
+
+    public static void getRestaurant(String jsonData) {
+
+    }
+
+    public static void getFoods(String jsonData) {
+
+    }
+
+    public static void addToCart(String jsonData) {
+
+    }
+
+    public static void getCart() {
+
+    }
+
+    public static void finalizeOrder() {
+
+    }
+
+    public static void getRecommendedRestaurants() {
+
+    }
+
+
+    public static void handleAction(String action, String jsonData) throws IOException {
         switch (action) {
             case "addRestaurant":
                 addRestaurant(jsonData);
@@ -48,7 +89,7 @@ public class App
         }
     }
 
-    public static void main( String[] args ) throws JsonParseException, JsonMappingException, IOException
+    public static void main( String[] args ) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {

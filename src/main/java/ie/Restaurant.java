@@ -1,10 +1,12 @@
 package ie;
 
+import java.util.ArrayList;
+
 public class Restaurant {
     private String name;
     private String description;
-    private String location;
-    private Food[] menu;
+    private Location location;
+    private ArrayList<Food> menu = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -22,11 +24,19 @@ public class Restaurant {
         this.description = description;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public ArrayList<Food> getMenu() {
+        return menu;
+    }
+
+    public void setMenu (ArrayList<Food> menu) {
+        this.menu = menu;
     }
 }
