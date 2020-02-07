@@ -7,8 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class App
 {
@@ -31,6 +30,29 @@ public class App
             }
         }
         return index;
+    }
+
+    private static Map<String, Float> getBestRestaurants(int numOfBests) {
+        Map<String, Float> allRestaurants = new HashMap<String, Float>();
+
+        for (int i = 0; i < restaurants.size(); i++) {
+            String currentRestaurantName = restaurants.get(i).getName();
+            float currentPopularity = restaurants.get(i).getPopularity();
+            allRestaurants.put(currentRestaurantName, currentPopularity);
+        }
+
+        TreeMap<String, Float> sortedRestaurants = new TreeMap<>();
+        sortedRestaurants.putAll(allRestaurants);
+
+        allRestaurants.clear();
+        int counter = 0;
+        for (Map.Entry<String, Float> entry : sortedRestaurants.entrySet()) {
+            if (counter >= numOfBests)
+                break;
+            allRestaurants.put(entry.getKey(), entry.getValue());
+        }
+
+        return allRestaurants;
     }
 
     public static void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
@@ -122,9 +144,14 @@ public class App
     }
 
     public static void getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
-        //remains
+        int numOfBests = 3;
+        if (restaurants.size() < numOfBests)
+            numOfBests = restaurants.size();
+        Map<String, Float> bestRestaurants = getBestRestaurants(numOfBests);
+        ObjectMapper mapperObj = new ObjectMapper();
+        String bestRestaurantsJson = mapperObj.writeValueAsString(bestRestaurants);
+        System.out.println(bestRestaurantsJson);
     }
-
 
     public static void handleAction(String action, String jsonData) throws IOException {
         switch (action) {

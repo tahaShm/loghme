@@ -82,4 +82,19 @@ public class Restaurant {
             isValid = true;
         return isValid;
     }
+
+    public float getPopularity() {
+        float average = getAverageFoodPopulations();
+        float distance = location.getDistance();
+        return average / distance;
+    }
+
+    private float getAverageFoodPopulations() {
+        float total = 0;
+        for (int i = 0; i < menu.size(); i++) {
+            total += menu.get(i).getPopularity();
+        }
+        float average = (float) (total / menu.size());
+        return average;
+    }
 }
