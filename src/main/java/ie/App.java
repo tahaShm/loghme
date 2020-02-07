@@ -116,11 +116,13 @@ public class App
     }
 
     public static void finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
-
+        customer.printFoodCart();
+        System.out.println("Your order was submitted.");
+        customer.freeCart();
     }
 
     public static void getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
-
+        //remains
     }
 
 

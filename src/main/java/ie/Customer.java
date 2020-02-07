@@ -51,4 +51,10 @@ public class Customer {
 //            System.out.println("food: " + entry.getKey() + " value: " + entry.getValue());
 //        }
     }
+
+    public void freeCart() {
+        restaurantIsSet = false;
+        restaurantName = "";
+        footCart.clear();
+    }
 }
