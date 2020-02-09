@@ -1,7 +1,5 @@
 package ie;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ public class App
         return restaurants;
     }
 
-    public int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
+    public int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws IOException {
         int index = -1;
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
@@ -47,8 +45,7 @@ public class App
         return index;
     }
 
-    public HashMap<String, Float> sortByValue(HashMap<String, Float> hm)
-    {
+    public HashMap<String, Float> sortByValue(HashMap<String, Float> hm) {
         // Create a list from elements of HashMap
         List<Map.Entry<String, Float> > list =
                 new LinkedList<Map.Entry<String, Float> >(hm.entrySet());
@@ -93,26 +90,23 @@ public class App
         return allRestaurants;
     }
 
-    public void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
-        //What should we do if restaurant name is repetitive?
+    public void addRestaurant(String jsonData) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Restaurant newRestaurant = mapper.readValue(jsonData, Restaurant.class);
         restaurants.add(newRestaurant);
     }
 
-    public boolean addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void addFood(String jsonData) throws RestaurantNotFoundExp, IOException{
         ObjectMapper mapper = new ObjectMapper();
         Food newFood = mapper.readValue(jsonData, Food.class);
         int index = getIndexOfRestaurant(jsonData, 1);
-        if (index >= 0) {
+        if (index >= 0)
             restaurants.get(index).addFood(newFood);
-            return true;
-        }
         else
-            return false;
+            throw new RestaurantNotFoundExp();
     }
 
-    public String getRestaurantsInfo() throws JsonParseException, JsonMappingException, IOException {
+    public String getRestaurantsInfo() {
         String response = "";
         for (int i = 0; i < restaurants.size(); i++) {
             response += restaurants.get(i).getName() + '\n';
@@ -120,39 +114,34 @@ public class App
         return response;
     }
 
-    public String getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
-        String response = "";
+    public String getRestaurant(String jsonData) throws RestaurantNotFoundExp, IOException{
         int index = getIndexOfRestaurant(jsonData, 0);
         if (index >= 0)
-            response = restaurants.get(index).sendJsonInfo();
+            return restaurants.get(index).sendJsonInfo();
         else
-            response = "Invalid restaurant name!";
-        return response;
+            throw new RestaurantNotFoundExp();
     }
 
-    public String getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public String getFood(String jsonData) throws RestaurantNotFoundExp, IOException{
         int index = getIndexOfRestaurant(jsonData, 1);
-        String response = "";
 
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
         String foodName = newName.getFoodName();
 
         if (index >= 0)
-            response = restaurants.get(index).sendJsonFoodInfo(foodName);
+            return restaurants.get(index).sendJsonFoodInfo(foodName);
         else
-            response = "Invalid restaurant name!";
-        return response;
+            throw new RestaurantNotFoundExp();
     }
 
-    public String addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void addToCart(String jsonData) throws RestaurantNotFoundExp, FoodFromOtherRestaurantInCartExp, FoodNotFoundExp, IOException{
         boolean allowToAdd = false;
-        String response = "";
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
         String restaurantName = newName.getRestaurantName();
 
-        if (customer.isRestaurantSet() == false)
+        if (!customer.isRestaurantSet())
             allowToAdd = true;
         else {
             String currentRestaurantName = customer.getRestaurantName();
@@ -170,42 +159,36 @@ public class App
                     customer.addFoodToCart(foodName, restaurantName);
                 }
                 else
-                    response = "Invalid food name!\n";
+                    throw new FoodNotFoundExp();
             }
             else
-                response = "Invalid restaurant name!\n";
+                throw new RestaurantNotFoundExp();
         }
         else {
-            response = "Your cart is from another restaurant!\n";
+            throw new FoodFromOtherRestaurantInCartExp();
         }
-        return response;
     }
 
-    public Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException {
+    public Map<String, Integer> getCart() {
         return customer.getFoodCart();
     }
 
-    public String getCartJson() throws JsonParseException, JsonMappingException, IOException {
+    public String getCartJson() throws IOException {
         return customer.getCartJson();
     }
 
-    public String finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
+    public String finalizeOrder() throws IOException{
         String jsonFoodCart = customer.getCartJson();
         customer.freeCart();
         return jsonFoodCart;
     }
 
-    public String getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
+    public String getRecommendedRestaurants() throws IOException{
         int numOfBests = 3;
         if (restaurants.size() < numOfBests)
             numOfBests = restaurants.size();
         Map<String, Float> bestRestaurants = getBestRestaurants(numOfBests);
         ObjectMapper mapperObj = new ObjectMapper();
         return mapperObj.writeValueAsString(bestRestaurants);
-    }
-
-    public void main(String[] args) throws IOException
-    {
-
     }
 }

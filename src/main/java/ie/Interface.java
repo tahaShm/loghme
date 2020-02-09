@@ -7,13 +7,13 @@ import java.io.InputStreamReader;
 public class Interface {
     private static App app;
     public static void handleAction(String action, String jsonData) throws IOException {
-        switch (action) {
+        try {
+            switch (action) {
             case "addRestaurant":
                 app.addRestaurant(jsonData);
                 break;
             case "addFood":
-                if (!app.addFood(jsonData))
-                    System.out.println("Invalid restaurant name!");;
+                app.addFood(jsonData);
                 break;
             case "getRestaurants":
                 System.out.print(app.getRestaurantsInfo());
@@ -25,7 +25,7 @@ public class Interface {
                 System.out.println(app.getFood(jsonData));
                 break;
             case "addToCart":
-                System.out.print(app.addToCart(jsonData));
+                app.addToCart(jsonData);
                 break;
             case "getCart":
                 System.out.println(app.getCartJson());
@@ -40,6 +40,17 @@ public class Interface {
             default:
                 System.out.println("Wrong command!");
                 break;
+            }
+        }
+        catch (Exception e) {
+            if (e instanceof FoodNotFoundExp)
+                System.out.println("Food does not exist!");
+            else if (e instanceof RestaurantNotFoundExp)
+                System.out.println("Restaurant does not exist!");
+            else if (e instanceof FoodFromOtherRestaurantInCartExp)
+                System.out.println("There is food from another restaurant in your cart!");
+            else if (e instanceof IOException)
+                System.out.println("Bad input!");
         }
     }
 

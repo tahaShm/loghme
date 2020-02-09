@@ -85,7 +85,7 @@ public class AppTest
             assertTrue(resultCart.containsKey("Food11"));
             assertTrue(resultCart.containsKey("Food12"));
         }
-        catch (IOException e) {
+        catch (Exception e) {
             fail();
         }
     }
