@@ -3,8 +3,6 @@ package ie;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.util.JSONPObject;
-//import netscape.javascript.JSObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,14 +43,10 @@ public class Customer {
         foodCart.put(foodName, 1);
     }
 
-    //todo : should change the name
-    public String printFoodCart() throws JsonParseException, JsonMappingException, IOException {
+    public String getCartJson() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapperObj = new ObjectMapper();
         String foodCartJson = mapperObj.writeValueAsString(foodCart);
         return foodCartJson;
-//        for (Map.Entry<String, Integer> entry : footCart.entrySet()) {
-//            System.out.println("food: " + entry.getKey() + " value: " + entry.getValue());
-//        }
     }
 
     public void freeCart() {

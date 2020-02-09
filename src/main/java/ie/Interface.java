@@ -12,31 +12,33 @@ public class Interface {
                 app.addRestaurant(jsonData);
                 break;
             case "addFood":
-                app.addFood(jsonData);
+                if (!app.addFood(jsonData))
+                    System.out.println("Invalid restaurant name!");;
                 break;
             case "getRestaurants":
-                app.printRestaurants();
+                System.out.print(app.getRestaurantsInfo());
                 break;
             case "getRestaurant":
-                app.getRestaurant(jsonData);
+                System.out.println(app.getRestaurant(jsonData));
                 break;
             case "getFood":
-                app.getFood(jsonData);
+                System.out.println(app.getFood(jsonData));
                 break;
             case "addToCart":
-                app.addToCart(jsonData);
+                System.out.print(app.addToCart(jsonData));
                 break;
             case "getCart":
-                app.getCart();
+                System.out.println(app.getCartJson());
                 break;
             case "finalizeOrder":
-                app.finalizeOrder();
+                System.out.println(app.finalizeOrder());
+                System.out.println("Your order was submitted.");
                 break;
             case "getRecommendedRestaurants":
-                app.getRecommendedRestaurants();
+                System.out.println(app.getRecommendedRestaurants());
                 break;
             default:
-                System.out.println("wrong command!");
+                System.out.println("Wrong command!");
                 break;
         }
     }

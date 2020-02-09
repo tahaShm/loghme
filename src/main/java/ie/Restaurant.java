@@ -58,13 +58,14 @@ public class Restaurant {
             menu.add(newFood);
     }
 
-    public void printJsonInfo() throws JsonParseException, JsonMappingException, IOException {
+    public String sendJsonInfo() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(this);
-        System.out.println(json);
+//        System.out.println(mapper.writeValueAsString(this));
+//        return "no";
+        return mapper.writeValueAsString(this);
     }
 
-    public void printJsonFoodInfo(String foodName) throws JsonParseException, JsonMappingException, IOException {
+    public String sendJsonFoodInfo(String foodName) throws JsonParseException, JsonMappingException, IOException {
         int index = -1;
         for (int i = 0; i < menu.size(); i++) {
             if (foodName.equals(menu.get(i).getName())) {
@@ -73,9 +74,9 @@ public class Restaurant {
             }
         }
         if (index >= 0)
-            menu.get(index).printInfo();
+            return menu.get(index).sendInfo();
         else
-            System.out.println("Invalid food name!");
+            return "Invalid food name!";
     }
 
     public boolean isFoodValid(String foodName) {
@@ -92,20 +93,19 @@ public class Restaurant {
         return isValid;
     }
 
-    public float getPopularity() {
-        float average = getAverageFoodPopulations();
+    public float sendPopularity() {
+        float average = sendAverageFoodPopulations();
         float distance = location.getDistance();
         if (distance == 0)
             return Float.MAX_VALUE;
         return average / distance;
     }
 
-    private float getAverageFoodPopulations() {
+    private float sendAverageFoodPopulations() {
         float total = 0;
-        for (int i = 0; i < menu.size(); i++) {
-            total += menu.get(i).getPopularity();
+        for (Food food : menu) {
+            total += food.getPopularity();
         }
-        float average = (float) (total / menu.size());
-        return average;
+        return (total / menu.size());
     }
 }

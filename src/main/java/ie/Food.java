@@ -46,9 +46,9 @@ public class Food {
         this.price = price;
     }
 
-    public void printInfo() throws JsonParseException, JsonMappingException, IOException {
+    public String sendInfo() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(this);
-        System.out.println(json);
+        return json;
     }
 }

@@ -76,7 +76,7 @@ public class App
 
         for (int i = 0; i < restaurants.size(); i++) {
             String currentRestaurantName = restaurants.get(i).getName();
-            float currentPopularity = restaurants.get(i).getPopularity();
+            float currentPopularity = restaurants.get(i).sendPopularity();
             allRestaurants.put(currentRestaurantName, currentPopularity);
         }
 
@@ -100,45 +100,54 @@ public class App
         restaurants.add(newRestaurant);
     }
 
-    public void addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public boolean addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         ObjectMapper mapper = new ObjectMapper();
         Food newFood = mapper.readValue(jsonData, Food.class);
         int index = getIndexOfRestaurant(jsonData, 1);
-        if (index >= 0)
+        if (index >= 0) {
             restaurants.get(index).addFood(newFood);
-        else
-            System.out.println("Invalid restaurant name!");
-    }
-
-    public void printRestaurants() throws JsonParseException, JsonMappingException, IOException {
-        for (int i = 0; i < restaurants.size(); i++) {
-            System.out.println(restaurants.get(i).getName());
+            return true;
         }
+        else
+            return false;
     }
 
-    public void getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public String getRestaurantsInfo() throws JsonParseException, JsonMappingException, IOException {
+        String response = "";
+        for (int i = 0; i < restaurants.size(); i++) {
+            response += restaurants.get(i).getName() + '\n';
+        }
+        return response;
+    }
+
+    public String getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+        String response = "";
         int index = getIndexOfRestaurant(jsonData, 0);
         if (index >= 0)
-            restaurants.get(index).printJsonInfo();
+            response = restaurants.get(index).sendJsonInfo();
         else
-            System.out.println("Invalid restaurant name!");
+            response = "Invalid restaurant name!";
+        return response;
     }
 
-    public void getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public String getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         int index = getIndexOfRestaurant(jsonData, 1);
+        String response = "";
 
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
         String foodName = newName.getFoodName();
 
         if (index >= 0)
-            restaurants.get(index).printJsonFoodInfo(foodName);
+            response = restaurants.get(index).sendJsonFoodInfo(foodName);
         else
-            System.out.println("Invalid restaurant name!");
+            response = "Invalid restaurant name!";
+        return response;
     }
 
-    public void addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public String addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         boolean allowToAdd = false;
+        String response = "";
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
         String restaurantName = newName.getRestaurantName();
@@ -161,25 +170,27 @@ public class App
                     customer.addFoodToCart(foodName, restaurantName);
                 }
                 else
-                    System.out.println("Invalid food name!");
+                    response = "Invalid food name!\n";
             }
             else
-                System.out.println("Invalid restaurant name!");
+                response = "Invalid restaurant name!\n";
         }
         else {
-            System.out.println("Your cart is from another restaurant!");
+            response = "Your cart is from another restaurant!\n";
         }
+        return response;
     }
 
-    public Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException{
-        customer.printFoodCart();
+    public Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException {
         return customer.getFoodCart();
     }
 
+    public String getCartJson() throws JsonParseException, JsonMappingException, IOException {
+        return customer.getCartJson();
+    }
+
     public String finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
-        String jsonFoodCart = customer.printFoodCart();
-        System.out.println(jsonFoodCart);
-        System.out.println("Your order was submitted.");
+        String jsonFoodCart = customer.getCartJson();
         customer.freeCart();
         return jsonFoodCart;
     }
@@ -190,10 +201,7 @@ public class App
             numOfBests = restaurants.size();
         Map<String, Float> bestRestaurants = getBestRestaurants(numOfBests);
         ObjectMapper mapperObj = new ObjectMapper();
-        String bestRestaurantsJson = mapperObj.writeValueAsString(bestRestaurants);
-        System.out.println(bestRestaurantsJson);
-        //todo : should make interface to print stuff
-        return bestRestaurantsJson;
+        return mapperObj.writeValueAsString(bestRestaurants);
     }
 
     public void main(String[] args) throws IOException
