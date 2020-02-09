@@ -49,7 +49,7 @@ public class Interface {
                 System.out.println("Restaurant does not exist!");
             else if (e instanceof FoodFromOtherRestaurantInCartExp)
                 System.out.println("There is food from another restaurant in your cart!");
-            else if (e instanceof IOException)
+            else
                 System.out.println("Bad input!");
         }
     }

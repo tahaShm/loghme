@@ -19,7 +19,7 @@ public class Location {
         this.y = y;
     }
 
-    public float getDistance() {
+    public float sendDistance() {
         float distance = (float) Math.sqrt(x*x + y*y);
         return distance;
     }

@@ -1,7 +1,5 @@
 package ie;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -58,14 +56,12 @@ public class Restaurant {
             menu.add(newFood);
     }
 
-    public String sendJsonInfo() throws JsonParseException, JsonMappingException, IOException {
+    public String sendJsonInfo() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-//        System.out.println(mapper.writeValueAsString(this));
-//        return "no";
         return mapper.writeValueAsString(this);
     }
 
-    public String sendJsonFoodInfo(String foodName) throws JsonParseException, JsonMappingException, IOException {
+    public String sendJsonFoodInfo(String foodName) throws IOException {
         int index = -1;
         for (int i = 0; i < menu.size(); i++) {
             if (foodName.equals(menu.get(i).getName())) {
@@ -95,7 +91,7 @@ public class Restaurant {
 
     public float sendPopularity() {
         float average = sendAverageFoodPopulations();
-        float distance = location.getDistance();
+        float distance = location.sendDistance();
         if (distance == 0)
             return Float.MAX_VALUE;
         return average / distance;

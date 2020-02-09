@@ -1,7 +1,6 @@
 package ie;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -71,9 +70,9 @@ public class App
         HashMap<String, Float> allRestaurants = new HashMap<String, Float>();
         Map<String, Float> sortedRestaurants;
 
-        for (int i = 0; i < restaurants.size(); i++) {
-            String currentRestaurantName = restaurants.get(i).getName();
-            float currentPopularity = restaurants.get(i).sendPopularity();
+        for (Restaurant restaurant : restaurants) {
+            String currentRestaurantName = restaurant.getName();
+            float currentPopularity = restaurant.sendPopularity();
             allRestaurants.put(currentRestaurantName, currentPopularity);
         }
 
@@ -108,8 +107,8 @@ public class App
 
     public String getRestaurantsInfo() {
         String response = "";
-        for (int i = 0; i < restaurants.size(); i++) {
-            response += restaurants.get(i).getName() + '\n';
+        for (Restaurant restaurant : restaurants) {
+            response += restaurant.getName() + '\n';
         }
         return response;
     }
