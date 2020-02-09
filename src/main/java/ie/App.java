@@ -89,13 +89,17 @@ public class App
         return allRestaurants;
     }
 
-    public void addRestaurant(String jsonData) throws IOException {
+    public void addRestaurant(String jsonData) throws IOException, RestaurantAlreadyExistsExp {
         ObjectMapper mapper = new ObjectMapper();
         Restaurant newRestaurant = mapper.readValue(jsonData, Restaurant.class);
+        for (Restaurant restaurant: restaurants) {
+            if (restaurant.getName().equals(newRestaurant.getName()))
+                throw new RestaurantAlreadyExistsExp();
+        }
         restaurants.add(newRestaurant);
     }
 
-    public void addFood(String jsonData) throws RestaurantNotFoundExp, IOException{
+    public void addFood(String jsonData) throws RestaurantNotFoundExp, IOException, FoodAlreadyExistsExp{
         ObjectMapper mapper = new ObjectMapper();
         Food newFood = mapper.readValue(jsonData, Food.class);
         int index = getIndexOfRestaurant(jsonData, 1);
@@ -121,7 +125,7 @@ public class App
             throw new RestaurantNotFoundExp();
     }
 
-    public String getFood(String jsonData) throws RestaurantNotFoundExp, IOException{
+    public String getFood(String jsonData) throws RestaurantNotFoundExp, IOException, FoodNotFoundExp{
         int index = getIndexOfRestaurant(jsonData, 1);
 
         ObjectMapper nameMapper = new ObjectMapper();
@@ -154,7 +158,7 @@ public class App
             String foodName = newName.getFoodName();
 
             if (index >= 0){
-                if (restaurants.get(index).isFoodValid(foodName)){
+                if (restaurants.get(index).isFoodValid(foodName)) {
                     customer.addFoodToCart(foodName, restaurantName);
                 }
                 else
@@ -176,13 +180,13 @@ public class App
         return customer.getCartJson();
     }
 
-    public String finalizeOrder() throws IOException{
+    public String finalizeOrder() throws IOException {
         String jsonFoodCart = customer.getCartJson();
         customer.freeCart();
         return jsonFoodCart;
     }
 
-    public String getRecommendedRestaurants() throws IOException{
+    public String getRecommendedRestaurants() throws IOException {
         int numOfBests = 3;
         if (restaurants.size() < numOfBests)
             numOfBests = restaurants.size();

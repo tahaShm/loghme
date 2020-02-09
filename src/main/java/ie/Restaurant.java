@@ -51,9 +51,11 @@ public class Restaurant {
         return -1;
     }
 
-    public void addFood(Food newFood) {
+    public void addFood(Food newFood) throws FoodAlreadyExistsExp {
         if (foodIdx(newFood.getName()) == -1)
             menu.add(newFood);
+        else
+            throw new FoodAlreadyExistsExp();
     }
 
     public String sendJsonInfo() throws IOException {
@@ -61,7 +63,7 @@ public class Restaurant {
         return mapper.writeValueAsString(this);
     }
 
-    public String sendJsonFoodInfo(String foodName) throws IOException {
+    public String sendJsonFoodInfo(String foodName) throws IOException, FoodNotFoundExp {
         int index = -1;
         for (int i = 0; i < menu.size(); i++) {
             if (foodName.equals(menu.get(i).getName())) {
@@ -72,7 +74,7 @@ public class Restaurant {
         if (index >= 0)
             return menu.get(index).sendInfo();
         else
-            return "Invalid food name!";
+            throw new FoodNotFoundExp();
     }
 
     public boolean isFoodValid(String foodName) {

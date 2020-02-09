@@ -2,18 +2,13 @@ package ie;
 
 import static org.junit.Assert.*;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.*;
 
-import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class AppTest 
 {
@@ -36,7 +31,7 @@ public class AppTest
             app.addRestaurant(res4);
             app.addRestaurant(res5);
         }
-        catch (IOException e) {
+        catch (Exception e) {
             fail();
         }
     }
@@ -54,8 +49,15 @@ public class AppTest
             fail();
         }
         assertTrue(resultRestaurantsNames.containsKey("Restaurant5"));
-        assertTrue(resultRestaurantsNames.containsKey("Restaurant1"));
+        assertTrue(resultRestaurantsNames.containsKey("Restaurant3"));
         assertTrue(resultRestaurantsNames.containsKey("Restaurant2"));
+
+//        populations in order of restaurant name
+//        0.7/221 = 0.0031
+//        0.4/41 = 0.009
+//        0.65/196 = 0.0033
+//        0.65/229 = 0.002
+//        0.5/0.01 = 50
     }
 
     @Test
