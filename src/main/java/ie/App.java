@@ -22,6 +22,11 @@ public class App
         return singleApp;
     }
 
+    public void clear() {
+        restaurants.clear();
+        customer.clear();
+    }
+
     public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }

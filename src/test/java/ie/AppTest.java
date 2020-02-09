@@ -49,20 +49,20 @@ public class AppTest
             fail();
         }
         assertTrue(resultRestaurantsNames.containsKey("Restaurant5"));
-        assertTrue(resultRestaurantsNames.containsKey("Restaurant3"));
+        assertTrue(resultRestaurantsNames.containsKey("Restaurant1"));
         assertTrue(resultRestaurantsNames.containsKey("Restaurant2"));
 
 //        populations in order of restaurant name
-//        0.7/221 = 0.0031
+//        0.7/221 = 0.003167
 //        0.4/41 = 0.009
-//        0.65/196 = 0.0033
+//        0.65/196 = 0.003163
 //        0.65/229 = 0.002
 //        0.5/0.01 = 50
     }
 
     @Test
     public void testFinalizeOrder() {
-        HashMap<String, Float> resultCart = null;
+        HashMap<String, Integer> resultCart = null;
         String res1 = "", res2 = "", res3 = "", res4 = "", res5 = "", cartJson;
         try {
             res1 = Files.readString(Paths.get(path + "order1.json"));
@@ -71,9 +71,7 @@ public class AppTest
             res4 = Files.readString(Paths.get(path + "order4.json"));
             res5 = Files.readString(Paths.get(path + "order5.json"));
             app.addToCart(res1);
-            app.addToCart(res2);
-            app.addToCart(res3);
-            app.addToCart(res4);
+            app.addToCart(res1);
             app.addToCart(res5);
 
             assertEquals(2, app.getCart().size());
@@ -86,10 +84,17 @@ public class AppTest
             resultCart = mapper.readValue(cartJson, HashMap.class);
             assertTrue(resultCart.containsKey("Food11"));
             assertTrue(resultCart.containsKey("Food12"));
+            assertEquals(2, resultCart.get("Food11"), 0);
+            assertEquals(1, resultCart.get("Food12"), 0);
         }
         catch (Exception e) {
             fail();
         }
+    }
+
+    @AfterClass
+    public static void destructor() {
+        app.clear();
     }
 
 //    @Test

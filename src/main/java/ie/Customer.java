@@ -13,6 +13,12 @@ public class Customer {
     private String restaurantName;
     private Map<String, Integer> foodCart = new HashMap<String, Integer>();
 
+    public void clear() {
+        restaurantIsSet = false;
+        restaurantName = "";
+        foodCart.clear();
+    }
+
     public boolean isRestaurantSet() {
         return restaurantIsSet;
     }
