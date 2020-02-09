@@ -5,8 +5,44 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Interface {
+    private static App app;
+    public static void handleAction(String action, String jsonData) throws IOException {
+        switch (action) {
+            case "addRestaurant":
+                app.addRestaurant(jsonData);
+                break;
+            case "addFood":
+                app.addFood(jsonData);
+                break;
+            case "getRestaurants":
+                app.printRestaurants();
+                break;
+            case "getRestaurant":
+                app.getRestaurant(jsonData);
+                break;
+            case "getFood":
+                app.getFood(jsonData);
+                break;
+            case "addToCart":
+                app.addToCart(jsonData);
+                break;
+            case "getCart":
+                app.getCart();
+                break;
+            case "finalizeOrder":
+                app.finalizeOrder();
+                break;
+            case "getRecommendedRestaurants":
+                app.getRecommendedRestaurants();
+                break;
+            default:
+                System.out.println("wrong command!");
+                break;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
-        App app = App.getInstance();
+        app = App.getInstance();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             String command = br.readLine();
@@ -18,7 +54,7 @@ public class Interface {
             }
             else
                 action = command;
-            app.handleAction(action, jsonData);
+            handleAction(action, jsonData);
         }
     }
 }

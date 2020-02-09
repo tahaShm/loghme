@@ -18,8 +18,7 @@ public class App
         customer = new Customer();
     }
 
-    public static App getInstance()
-    {
+    public static App getInstance() {
         if (singleApp == null)
             singleApp = new App();
 
@@ -195,41 +194,6 @@ public class App
         System.out.println(bestRestaurantsJson);
         //todo : should make interface to print stuff
         return bestRestaurantsJson;
-    }
-
-    public void handleAction(String action, String jsonData) throws IOException {
-        switch (action) {
-            case "addRestaurant":
-                addRestaurant(jsonData);
-                break;
-            case "addFood":
-                addFood(jsonData);
-                break;
-            case "getRestaurants":
-                printRestaurants();
-                break;
-            case "getRestaurant":
-                getRestaurant(jsonData);
-                break;
-            case "getFood":
-                getFood(jsonData);
-                break;
-            case "addToCart":
-                addToCart(jsonData);
-                break;
-            case "getCart":
-                getCart();
-                break;
-            case "finalizeOrder":
-                finalizeOrder();
-                break;
-            case "getRecommendedRestaurants":
-                getRecommendedRestaurants();
-                break;
-            default:
-                System.out.println("wrong command!");
-                break;
-        }
     }
 
     public void main(String[] args) throws IOException

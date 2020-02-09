@@ -4,10 +4,8 @@
     <list default="true" id="7c3ef36b-ceba-474f-95c8-7b5554aab598" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ie/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ie/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/App$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/App$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ie/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ie/AppTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,10 +60,25 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
-  <component name="RunManager" selected="Application.CA1">
+  <component name="RunManager" selected="JUnit.AppTest">
     <configuration name="CA1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ie.Interface" />
       <module name="ie_ca1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ie_ca1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ie" />
+      <option name="MAIN_CLASS_NAME" value="ie.AppTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -112,9 +125,11 @@
     <list>
       <item itemvalue="Application.CA1" />
       <item itemvalue="JUnit.ie in ie_ca1" />
+      <item itemvalue="JUnit.AppTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AppTest" />
         <item itemvalue="JUnit.ie in ie_ca1" />
       </list>
     </recent_temporary>
@@ -181,22 +196,22 @@
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
     <state x="704" y="296" width="501" height="513" key="FileChooserDialogImpl/0.28.1920.1052@0.28.1920.1052" timestamp="1581156630404" />
-    <state width="1874" height="190" key="GridCell.Tab.0.bottom" timestamp="1581243197347">
+    <state width="1874" height="190" key="GridCell.Tab.0.bottom" timestamp="1581250792403">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1874" height="190" key="GridCell.Tab.0.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1581243197347" />
-    <state width="1874" height="190" key="GridCell.Tab.0.center" timestamp="1581243197346">
+    <state width="1874" height="190" key="GridCell.Tab.0.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1581250792403" />
+    <state width="1874" height="190" key="GridCell.Tab.0.center" timestamp="1581250792402">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1874" height="190" key="GridCell.Tab.0.center/0.28.1920.1052@0.28.1920.1052" timestamp="1581243197346" />
-    <state width="1874" height="190" key="GridCell.Tab.0.left" timestamp="1581243197346">
+    <state width="1874" height="190" key="GridCell.Tab.0.center/0.28.1920.1052@0.28.1920.1052" timestamp="1581250792402" />
+    <state width="1874" height="190" key="GridCell.Tab.0.left" timestamp="1581250792401">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1874" height="190" key="GridCell.Tab.0.left/0.28.1920.1052@0.28.1920.1052" timestamp="1581243197346" />
-    <state width="1874" height="190" key="GridCell.Tab.0.right" timestamp="1581243197347">
+    <state width="1874" height="190" key="GridCell.Tab.0.left/0.28.1920.1052@0.28.1920.1052" timestamp="1581250792401" />
+    <state width="1874" height="190" key="GridCell.Tab.0.right" timestamp="1581250792402">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1874" height="190" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1581243197347" />
+    <state width="1874" height="190" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1581250792402" />
     <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1581160100296">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
