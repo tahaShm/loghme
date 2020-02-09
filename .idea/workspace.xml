@@ -2,12 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c3ef36b-ceba-474f-95c8-7b5554aab598" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ie_ca1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/restaurant2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ie/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ie/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/Food.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/Location.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/Names.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/Names.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ie/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/Restaurant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ie/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ie/AppTest.class" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,37 +44,46 @@
   </component>
   <component name="ProjectId" id="1XNSqxdAVCiPGL0ObAGcxyFiPnP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="ca1" type="Application" factoryName="Application">
+  <component name="RunManager" selected="JUnit.ie in ie_ca1">
+    <configuration name="CA1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ie.App" />
       <module name="ie_ca1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ie in ie_ca1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ie_ca1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ie" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -92,6 +113,15 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.CA1" />
+      <item itemvalue="JUnit.ie in ie_ca1" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ie in ie_ca1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -129,5 +159,79 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="555" y="214" width="800" height="677" key="#Project_Structure" timestamp="1581155223796">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="555" y="214" width="800" height="677" key="#Project_Structure/0.28.1920.1052@0.28.1920.1052" timestamp="1581155223796" />
+    <state x="418" y="211" width="1084" height="777" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581177365363">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="418" y="211" width="1084" height="777" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1581177365363" />
+    <state x="100" y="126" width="1720" height="854" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1581163945450">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="100" y="126" width="1720" height="854" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1581163945450" />
+    <state x="692" y="339" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581149614181">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="692" y="339" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1581149614181" />
+    <state x="506" y="185" width="898" height="736" key="#ie_in_ie_ca1" timestamp="1581151842169">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="506" y="185" width="898" height="736" key="#ie_in_ie_ca1/0.28.1920.1052@0.28.1920.1052" timestamp="1581151842169" />
+    <state x="704" y="296" width="501" height="513" key="FileChooserDialogImpl" timestamp="1581156630404">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="704" y="296" width="501" height="513" key="FileChooserDialogImpl/0.28.1920.1052@0.28.1920.1052" timestamp="1581156630404" />
+    <state width="1874" height="269" key="GridCell.Tab.0.bottom" timestamp="1581187346751">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="269" key="GridCell.Tab.0.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1581187346751" />
+    <state width="1874" height="269" key="GridCell.Tab.0.center" timestamp="1581187346750">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="269" key="GridCell.Tab.0.center/0.28.1920.1052@0.28.1920.1052" timestamp="1581187346750" />
+    <state width="1874" height="269" key="GridCell.Tab.0.left" timestamp="1581187346749">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="269" key="GridCell.Tab.0.left/0.28.1920.1052@0.28.1920.1052" timestamp="1581187346749" />
+    <state width="1874" height="269" key="GridCell.Tab.0.right" timestamp="1581187346750">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="269" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1581187346750" />
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1581160100296">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1581160100296" />
+    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1581160100296">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.center/0.28.1920.1052@0.28.1920.1052" timestamp="1581160100296" />
+    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1581160100296">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.left/0.28.1920.1052@0.28.1920.1052" timestamp="1581160100296" />
+    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1581160100296">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1874" height="343" key="GridCell.Tab.1.right/0.28.1920.1052@0.28.1920.1052" timestamp="1581160100296" />
+    <state x="493" y="211" width="924" height="684" key="Maven.ArtifactSearchDialog" timestamp="1581156542104">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="493" y="211" width="924" height="684" key="Maven.ArtifactSearchDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1581156542104" />
+    <state x="443" y="130" width="1024" height="845" key="SettingsEditor" timestamp="1581149099665">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="443" y="130" width="1024" height="845" key="SettingsEditor/0.28.1920.1052@0.28.1920.1052" timestamp="1581149099665" />
+    <state x="624" y="253" key="run.anything.popup" timestamp="1581177380070">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="624" y="253" key="run.anything.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1581177380070" />
+    <state x="623" y="258" width="672" height="678" key="search.everywhere.popup" timestamp="1581186392742">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state x="623" y="258" width="672" height="678" key="search.everywhere.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1581186392742" />
   </component>
 </project>

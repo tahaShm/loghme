@@ -45,8 +45,17 @@ public class Restaurant {
         this.menu = menu;
     }
 
+    public int foodIdx(String foodName) {
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().equals(foodName))
+                return i;
+        }
+        return -1;
+    }
+
     public void addFood(Food newFood) {
-        menu.add(newFood);
+        if (foodIdx(newFood.getName()) == -1)
+            menu.add(newFood);
     }
 
     public void printJsonInfo() throws JsonParseException, JsonMappingException, IOException {
@@ -86,6 +95,8 @@ public class Restaurant {
     public float getPopularity() {
         float average = getAverageFoodPopulations();
         float distance = location.getDistance();
+        if (distance == 0)
+            return Float.MAX_VALUE;
         return average / distance;
     }
 

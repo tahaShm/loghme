@@ -14,6 +14,10 @@ public class App
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
     private static Customer customer = new Customer();
 
+    public static ArrayList<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
     public static int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
         int index = -1;
         ObjectMapper nameMapper = new ObjectMapper();
@@ -32,8 +36,32 @@ public class App
         return index;
     }
 
+    public static HashMap<String, Float> sortByValue(HashMap<String, Float> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Float> > list =
+                new LinkedList<Map.Entry<String, Float> >(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Float> >() {
+            public int compare(Map.Entry<String, Float> o1,
+                               Map.Entry<String, Float> o2)
+            {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Float> temp = new LinkedHashMap<String, Float>();
+        for (Map.Entry<String, Float> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+
     private static Map<String, Float> getBestRestaurants(int numOfBests) {
-        Map<String, Float> allRestaurants = new HashMap<String, Float>();
+        HashMap<String, Float> allRestaurants = new HashMap<String, Float>();
+        Map<String, Float> sortedRestaurants;
 
         for (int i = 0; i < restaurants.size(); i++) {
             String currentRestaurantName = restaurants.get(i).getName();
@@ -41,15 +69,14 @@ public class App
             allRestaurants.put(currentRestaurantName, currentPopularity);
         }
 
-        TreeMap<String, Float> sortedRestaurants = new TreeMap<>();
-        sortedRestaurants.putAll(allRestaurants);
-
+        sortedRestaurants = sortByValue(allRestaurants);
         allRestaurants.clear();
         int counter = 0;
         for (Map.Entry<String, Float> entry : sortedRestaurants.entrySet()) {
             if (counter >= numOfBests)
                 break;
             allRestaurants.put(entry.getKey(), entry.getValue());
+            counter++;
         }
 
         return allRestaurants;
@@ -72,7 +99,7 @@ public class App
             System.out.println("Invalid restaurant name!");
     }
 
-    public static void getRestaurants() throws JsonParseException, JsonMappingException, IOException{
+    public static void printRestaurants() throws JsonParseException, JsonMappingException, IOException {
         for (int i = 0; i < restaurants.size(); i++) {
             System.out.println(restaurants.get(i).getName());
         }
@@ -133,17 +160,20 @@ public class App
         }
     }
 
-    public static void getCart() throws JsonParseException, JsonMappingException, IOException{
+    public static Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException{
         customer.printFoodCart();
+        return customer.getFoodCart();
     }
 
-    public static void finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
-        customer.printFoodCart();
+    public static String finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
+        String jsonFoodCart = customer.printFoodCart();
+        System.out.println(jsonFoodCart);
         System.out.println("Your order was submitted.");
         customer.freeCart();
+        return jsonFoodCart;
     }
 
-    public static void getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
+    public static String getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
         int numOfBests = 3;
         if (restaurants.size() < numOfBests)
             numOfBests = restaurants.size();
@@ -151,6 +181,8 @@ public class App
         ObjectMapper mapperObj = new ObjectMapper();
         String bestRestaurantsJson = mapperObj.writeValueAsString(bestRestaurants);
         System.out.println(bestRestaurantsJson);
+        //todo : should make interface to print stuff
+        return bestRestaurantsJson;
     }
 
     public static void handleAction(String action, String jsonData) throws IOException {
@@ -162,7 +194,7 @@ public class App
                 addFood(jsonData);
                 break;
             case "getRestaurants":
-                getRestaurants();
+                printRestaurants();
                 break;
             case "getRestaurant":
                 getRestaurant(jsonData);
