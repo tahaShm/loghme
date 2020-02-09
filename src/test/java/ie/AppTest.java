@@ -19,74 +19,74 @@ public class AppTest
 {
     static String path = "src/test/resources/";
 
-    @BeforeClass
-    public static void init() {
-        String res1 = "", res2 = "", res3 = "", res4 = "", res5 = "";
-        try {
-            res1 = Files.readString(Paths.get(path + "restaurant1.json"));
-            res2 = Files.readString(Paths.get(path + "restaurant2.json"));
-            res3 = Files.readString(Paths.get(path + "restaurant3.json"));
-            res4 = Files.readString(Paths.get(path + "restaurant4.json"));
-            res5 = Files.readString(Paths.get(path + "restaurant5.json"));
-            App.addRestaurant(res1);
-            App.addRestaurant(res2);
-            App.addRestaurant(res3);
-            App.addRestaurant(res4);
-            App.addRestaurant(res5);
-        }
-        catch (IOException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void testRecommendedRestaurants() {
-        String result = "";
-        HashMap<String, Float> resultRestaurantsNames = null;
-        try {
-            result = App.getRecommendedRestaurants();
-            ObjectMapper mapper = new ObjectMapper();
-            resultRestaurantsNames = mapper.readValue(result, HashMap.class);
-        }
-        catch (IOException e) {
-            fail();
-        }
-        assertTrue(resultRestaurantsNames.containsKey("Restaurant5"));
-        assertTrue(resultRestaurantsNames.containsKey("Restaurant1"));
-        assertTrue(resultRestaurantsNames.containsKey("Restaurant2"));
-    }
-
-    @Test
-    public void testFinalizeOrder() {
-        HashMap<String, Float> resultCart = null;
-        String res1 = "", res2 = "", res3 = "", res4 = "", res5 = "", cartJson;
-        try {
-            res1 = Files.readString(Paths.get(path + "order1.json"));
-            res2 = Files.readString(Paths.get(path + "order2.json"));
-            res3 = Files.readString(Paths.get(path + "order3.json"));
-            res4 = Files.readString(Paths.get(path + "order4.json"));
-            res5 = Files.readString(Paths.get(path + "order5.json"));
-            App.addToCart(res1);
-            App.addToCart(res2);
-            App.addToCart(res3);
-            App.addToCart(res4);
-            App.addToCart(res5);
-
-            assertEquals(2, App.getCart().size());
-
-            cartJson = App.finalizeOrder();
-
-            assertEquals(0, App.getCart().size());
-
-            ObjectMapper mapper = new ObjectMapper();
-            resultCart = mapper.readValue(cartJson, HashMap.class);
-            assertTrue(resultCart.containsKey("Food11"));
-            assertTrue(resultCart.containsKey("Food12"));
-        }
-        catch (IOException e) {
-            fail();
-        }
-    }
+//    @BeforeClass
+//    public static void init() {
+//        String res1 = "", res2 = "", res3 = "", res4 = "", res5 = "";
+//        try {
+//            res1 = Files.readString(Paths.get(path + "restaurant1.json"));
+//            res2 = Files.readString(Paths.get(path + "restaurant2.json"));
+//            res3 = Files.readString(Paths.get(path + "restaurant3.json"));
+//            res4 = Files.readString(Paths.get(path + "restaurant4.json"));
+//            res5 = Files.readString(Paths.get(path + "restaurant5.json"));
+//            App.addRestaurant(res1);
+//            App.addRestaurant(res2);
+//            App.addRestaurant(res3);
+//            App.addRestaurant(res4);
+//            App.addRestaurant(res5);
+//        }
+//        catch (IOException e) {
+//            fail();
+//        }
+//    }
+//
+//    @Test
+//    public void testRecommendedRestaurants() {
+//        String result = "";
+//        HashMap<String, Float> resultRestaurantsNames = null;
+//        try {
+//            result = App.getRecommendedRestaurants();
+//            ObjectMapper mapper = new ObjectMapper();
+//            resultRestaurantsNames = mapper.readValue(result, HashMap.class);
+//        }
+//        catch (IOException e) {
+//            fail();
+//        }
+//        assertTrue(resultRestaurantsNames.containsKey("Restaurant5"));
+//        assertTrue(resultRestaurantsNames.containsKey("Restaurant1"));
+//        assertTrue(resultRestaurantsNames.containsKey("Restaurant2"));
+//    }
+//
+//    @Test
+//    public void testFinalizeOrder() {
+//        HashMap<String, Float> resultCart = null;
+//        String res1 = "", res2 = "", res3 = "", res4 = "", res5 = "", cartJson;
+//        try {
+//            res1 = Files.readString(Paths.get(path + "order1.json"));
+//            res2 = Files.readString(Paths.get(path + "order2.json"));
+//            res3 = Files.readString(Paths.get(path + "order3.json"));
+//            res4 = Files.readString(Paths.get(path + "order4.json"));
+//            res5 = Files.readString(Paths.get(path + "order5.json"));
+//            App.addToCart(res1);
+//            App.addToCart(res2);
+//            App.addToCart(res3);
+//            App.addToCart(res4);
+//            App.addToCart(res5);
+//
+//            assertEquals(2, App.getCart().size());
+//
+//            cartJson = App.finalizeOrder();
+//
+//            assertEquals(0, App.getCart().size());
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            resultCart = mapper.readValue(cartJson, HashMap.class);
+//            assertTrue(resultCart.containsKey("Food11"));
+//            assertTrue(resultCart.containsKey("Food12"));
+//        }
+//        catch (IOException e) {
+//            fail();
+//        }
+//    }
 
 //    @Test
 //    public void testAddRestaurant() {

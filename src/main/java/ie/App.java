@@ -4,21 +4,33 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class App
 {
-    private static ArrayList<Restaurant> restaurants = new ArrayList<>();
-    private static Customer customer = new Customer();
+    private ArrayList<Restaurant> restaurants;
+    private Customer customer;
+    private static App singleApp = null;
 
-    public static ArrayList<Restaurant> getRestaurants() {
+    private App() {
+        restaurants = new ArrayList<>();
+        customer = new Customer();
+    }
+
+    public static App getInstance()
+    {
+        if (singleApp == null)
+            singleApp = new App();
+
+        return singleApp;
+    }
+
+    public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }
 
-    public static int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
+    public int getIndexOfRestaurant(String jsonData, int nameOrRestaurantName) throws JsonParseException, JsonMappingException, IOException {
         int index = -1;
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
@@ -36,7 +48,7 @@ public class App
         return index;
     }
 
-    public static HashMap<String, Float> sortByValue(HashMap<String, Float> hm)
+    public HashMap<String, Float> sortByValue(HashMap<String, Float> hm)
     {
         // Create a list from elements of HashMap
         List<Map.Entry<String, Float> > list =
@@ -59,7 +71,7 @@ public class App
         return temp;
     }
 
-    private static Map<String, Float> getBestRestaurants(int numOfBests) {
+    private Map<String, Float> getBestRestaurants(int numOfBests) {
         HashMap<String, Float> allRestaurants = new HashMap<String, Float>();
         Map<String, Float> sortedRestaurants;
 
@@ -82,14 +94,14 @@ public class App
         return allRestaurants;
     }
 
-    public static void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
+    public void addRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException {
         //What should we do if restaurant name is repetitive?
         ObjectMapper mapper = new ObjectMapper();
         Restaurant newRestaurant = mapper.readValue(jsonData, Restaurant.class);
         restaurants.add(newRestaurant);
     }
 
-    public static void addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void addFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         ObjectMapper mapper = new ObjectMapper();
         Food newFood = mapper.readValue(jsonData, Food.class);
         int index = getIndexOfRestaurant(jsonData, 1);
@@ -99,13 +111,13 @@ public class App
             System.out.println("Invalid restaurant name!");
     }
 
-    public static void printRestaurants() throws JsonParseException, JsonMappingException, IOException {
+    public void printRestaurants() throws JsonParseException, JsonMappingException, IOException {
         for (int i = 0; i < restaurants.size(); i++) {
             System.out.println(restaurants.get(i).getName());
         }
     }
 
-    public static void getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void getRestaurant(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         int index = getIndexOfRestaurant(jsonData, 0);
         if (index >= 0)
             restaurants.get(index).printJsonInfo();
@@ -113,7 +125,7 @@ public class App
             System.out.println("Invalid restaurant name!");
     }
 
-    public static void getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void getFood(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         int index = getIndexOfRestaurant(jsonData, 1);
 
         ObjectMapper nameMapper = new ObjectMapper();
@@ -126,7 +138,7 @@ public class App
             System.out.println("Invalid restaurant name!");
     }
 
-    public static void addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
+    public void addToCart(String jsonData) throws JsonParseException, JsonMappingException, IOException{
         boolean allowToAdd = false;
         ObjectMapper nameMapper = new ObjectMapper();
         Names newName = nameMapper.readValue(jsonData, Names.class);
@@ -160,12 +172,12 @@ public class App
         }
     }
 
-    public static Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException{
+    public Map<String, Integer> getCart() throws JsonParseException, JsonMappingException, IOException{
         customer.printFoodCart();
         return customer.getFoodCart();
     }
 
-    public static String finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
+    public String finalizeOrder() throws JsonParseException, JsonMappingException, IOException{
         String jsonFoodCart = customer.printFoodCart();
         System.out.println(jsonFoodCart);
         System.out.println("Your order was submitted.");
@@ -173,7 +185,7 @@ public class App
         return jsonFoodCart;
     }
 
-    public static String getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
+    public String getRecommendedRestaurants() throws JsonParseException, JsonMappingException, IOException{
         int numOfBests = 3;
         if (restaurants.size() < numOfBests)
             numOfBests = restaurants.size();
@@ -185,7 +197,7 @@ public class App
         return bestRestaurantsJson;
     }
 
-    public static void handleAction(String action, String jsonData) throws IOException {
+    public void handleAction(String action, String jsonData) throws IOException {
         switch (action) {
             case "addRestaurant":
                 addRestaurant(jsonData);
@@ -220,22 +232,8 @@ public class App
         }
     }
 
-    public static void main( String[] args ) throws IOException
+    public void main(String[] args) throws IOException
     {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            String command = br.readLine();
-            String action = "";
-            String jsonData = "";
-            if(command.contains(" ")){
-                action = command.substring(0, command.indexOf(" "));
-                jsonData = command.substring(command.indexOf(" ") + 1);
-            }
-            else
-                action = command;
 
-            handleAction(action, jsonData);
-
-        }
     }
 }
